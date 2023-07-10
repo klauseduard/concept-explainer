@@ -1,0 +1,18 @@
+    {% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        {% include 'form.html' %}
+        <div class="concepts">
+            <h2>Available presaved concepts</h2>
+            <div>New query results are not automatically added to avoid polluting the list, but they are stored on disk and can be manually added to the
+            list of presaved concepts.</div>
+            <ul>
+                {% for concept in concepts %}
+                    <li><a href="{{ url_for('concept', concept=concept) }}">{{ concept|replace("_", " ") }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+

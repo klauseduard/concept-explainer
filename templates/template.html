@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        {% include 'form.html' %}
+
+        <a href="{{ url_for('concepts') }}">Browse presaved concepts</a> 
+
+        {% if result %}
+            <h2>Explanation:</h2>
+            <div>{{ result | safe }}</div>
+        {% endif %}
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+    </div>
+{% endblock %}
+
+

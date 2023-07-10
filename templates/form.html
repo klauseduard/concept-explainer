@@ -1,0 +1,17 @@
+<form method="POST" action="{{ url_for('index') }}">
+    <label for="concept">Enter a concept you'd like to be explained:</label>
+    <input type="text" id="concept" name="concept" value="{{ concept or 'Software architecture' }}">
+
+    <label for="specialist_role">Enter the role of the specialist:</label>
+    <input type="text" id="specialist_role" name="specialist_role" value="{{ specialist_role or 'Software architect' }}">
+
+    <label for="target_audience">Enter the target audience:</label>
+    <input type="text" id="target_audience" name="target_audience" value="{{ target_audience or 'Manager without much technical background' }}">
+
+    <label for="additional_context">Any additional context?</label>
+    <input type="text" id="additional_context" name="additional_context" value="{{ additional_context or '' }}" placeholder="(empty)">
+
+    <div class="spinner" id="spinner"></div>
+    <input type="submit" value="Explain">
+</form>
+

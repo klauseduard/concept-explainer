@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Explain a concept</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background-color: #e0f0e9;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px 2px #888;
+            margin-top: 50px;
+        }
+        h2 {
+            color: #266150;
+        }
+        label, input[type="submit"] {
+            display: block;
+            margin-bottom: 15px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #7bb892;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        input[type="submit"]:hover {
+            background-color: #619b78;
+        }
+        p {
+            color: #266150;
+        }
+
+
+        .concepts {
+            padding: 20px;
+            border: 1px solid #888;
+            background-color: #e0f0e9;
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px 2px #888;
+            margin-top: 30px;
+        }
+
+        .concepts ul {
+            padding-left: 20px;
+        }
+
+        .concepts li {
+            padding: 10px 0;
+        }
+
+        .concepts li a {
+            color: navy;
+            text-decoration: none;
+        }
+
+
+
+        /* Spinner Styles */
+        .spinner {
+            display: none;
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+    <!-- Header, navigation, etc. go here -->
+    {% block content %}{% endblock %}
+    <!-- Footer, scripts, etc. go here -->
+    <script>
+        document.querySelector('form').addEventListener('submit', function() {
+            document.getElementById('spinner').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
+
