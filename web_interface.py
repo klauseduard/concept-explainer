@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from flask import Flask, render_template, request, url_for
 from chat_generator import generate_chat, write_to_file
 import mistune
