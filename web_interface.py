@@ -1,19 +1,38 @@
 #!/usr/bin/env python3
 
+from sentence_transformers import SentenceTransformer
 from flask import Flask, render_template, request, url_for
 from chat_generator import generate_chat, write_to_file
 import mistune
 import os
 import re
+import json
 import urllib.parse
 from pathlib import Path
 from search_tfidf import build_tfidf_index, get_scores
+from search_semantic import load_embeddings_and_hashes, build_corpus_and_hashes, get_semantic_scores
 
 
 app = Flask(__name__)
 
 # create corpus and tf-idf matrix once when server starts
 vectorizer, tfidf_matrix, filenames = build_tfidf_index("./saved_concepts")
+
+
+# semantic search stuff
+model_name = 'all-MiniLM-L6-v2'
+embeddings_path = 'embeddings.npy'
+hashes_path = 'hashes.json'
+directory = "./saved_concepts"
+indices_path = 'indices.json'
+
+model = SentenceTransformer(model_name)
+#embeddings, hashes = load_embeddings_and_hashes(embeddings_path, hashes_path, indices_path)
+embeddings, hashes = load_embeddings_and_hashes(embeddings_path, hashes_path)
+
+ss_filenames, corpus, old_hashes = build_corpus_and_hashes(directory)
+with open(indices_path, 'r') as f:
+    indices = json.load(f)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -77,6 +96,23 @@ def search():
     print(query)
     scores = get_scores(query, vectorizer, tfidf_matrix, filenames)
     return render_template('search.html', scores=scores, query=query)
+
+
+#@app.route('/search_semantic', methods=['GET'])
+#def search_semantic():
+#    query = request.args.get('query', '')
+#    scores = []
+#    if query:
+#        scores = get_scores(query, model, embeddings, filenames)
+#    return render_template('search_semantic.html', scores=scores, query=query)
+
+@app.route('/search_semantic', methods=['GET'])
+def search_semantic():
+    query = request.args.get('query', '')
+    scores = []
+    if query:
+        scores = get_semantic_scores(query, model, embeddings, ss_filenames, indices)
+    return render_template('search_semantic.html', scores=scores, query=query)
 
 
 
