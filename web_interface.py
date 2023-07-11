@@ -7,8 +7,14 @@ import os
 import re
 import urllib.parse
 from pathlib import Path
+from search_tfidf import build_tfidf_index, get_scores
+
 
 app = Flask(__name__)
+
+# create corpus and tf-idf matrix once when server starts
+vectorizer, tfidf_matrix, filenames = build_tfidf_index("./saved_concepts")
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -62,6 +68,17 @@ def concept(concept):
             return render_template('concept.html', concept=concept, explanation=html_content)
     else:
         abort(404, description="Concept not found.")
+
+
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('query', '')
+    print(type(query))
+    print(query)
+    scores = get_scores(query, vectorizer, tfidf_matrix, filenames)
+    return render_template('search.html', scores=scores, query=query)
+
+
 
 
 if __name__ == "__main__":

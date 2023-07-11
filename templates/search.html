@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        {% include 'search_form.html' %}
+        {% if query %}
+            <div class="concepts">
+                <h2>Search results for "{{ query }}"</h2>
+                <div>These are the matches for your query in the presaved concepts, sorted by relevance according to tf-idf score.</div>
+                <ul>
+                    {% for filename, score in scores %}
+                        <li><a href="{{ url_for('concept', concept=filename) }}">{{ filename|replace("_", " ") }}</a> - Score: {{ score }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+        {% endif %}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,11 @@
+<form method="GET" action="{{ url_for('search') }}">
+    <label for="query">Enter a keyword or phrase to search the presaved concepts for:</label>
+    <input type="text" id="query" name="query" value="{{ query or '' }}">
+
+    <div class="spinner" id="spinner"></div>
+    <div class="flex-container">
+        <input type="submit" value="Search" class="btn">
+        <a href="{{ url_for('concepts') }}" class="btn">Browse presaved concepts</a>
+        <a href="{{ url_for('index') }}" class="btn">Explain a concept</a>
+    </div>
+</form>
