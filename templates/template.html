@@ -3,8 +3,6 @@
     <div class="container">
         {% include 'form.html' %}
 
-        <a href="{{ url_for('concepts') }}">Browse presaved concepts</a> 
-
         {% if result %}
             <h2>Explanation:</h2>
             <div>{{ result | safe }}</div>

@@ -12,6 +12,9 @@
     <input type="text" id="additional_context" name="additional_context" value="{{ additional_context or '' }}" placeholder="(empty)">
 
     <div class="spinner" id="spinner"></div>
-    <input type="submit" value="Explain">
+    <div class="flex-container">
+        <input type="submit" value="Explain" class="btn">
+        <a href="{{ url_for('concepts') }}" class="btn">Browse presaved concepts</a>
+    </div>
 </form>
 
