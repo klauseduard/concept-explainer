@@ -22,7 +22,7 @@ def generate_chat(concept, specialist_role, target_audience, additional_context=
     {additional_context if additional_context else ""}
     Invent follow-up questions the {target_audience} would ask and try to answer them.
     Provide one or more examples if possible.
-    After answering the follow-up questions and providing the examples, provide etymology of the term, and finally a summary.
+    After answering the follow-up questions and providing the examples, provide etymology and history of the term, and finally a summary.
     After providing the summary, provide a "See also" section containing related concepts that might help to understand the one discussed better. Format the concepts as hyperlinks in the form "?concept=related+concept&specialist_role={specialist_role}&target_audience={target_audience}"
     Format the text with Markdown syntax and apply line length limit of 80 characters.
     """
