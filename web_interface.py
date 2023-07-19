@@ -2,6 +2,7 @@
 
 from sentence_transformers import SentenceTransformer
 from flask import Flask, render_template, request, url_for
+from flask_httpauth import HTTPBasicAuth
 from chat_generator import generate_chat, write_to_file
 import mistune
 import os
@@ -14,6 +15,9 @@ from search_semantic import load_embeddings_and_hashes, build_corpus_and_hashes,
 
 
 app = Flask(__name__)
+
+# create the authentication object
+auth = HTTPBasicAuth()
 
 # create corpus and tf-idf matrix once when server starts
 vectorizer, tfidf_matrix, filenames = build_tfidf_index("./saved_concepts")
@@ -33,6 +37,17 @@ embeddings, hashes = load_embeddings_and_hashes(embeddings_path, hashes_path)
 ss_filenames, corpus, old_hashes = build_corpus_and_hashes(directory)
 with open(indices_path, 'r') as f:
     indices = json.load(f)
+
+
+# define the authentication verification function
+@auth.verify_password
+def verify_password(username, password):
+    return username == os.getenv('AUTH_USERNAME') and password == os.getenv('AUTH_PASSWORD')
+
+@app.before_request
+def before_request():
+    if os.getenv('REQUIRE_AUTH') == 'True':
+        return auth.login_required(lambda: None)()
 
 
 @app.route('/', methods=['GET', 'POST'])
