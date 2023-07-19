@@ -1,70 +1,74 @@
-# Rejection Sampling
+## Rejection Sampling
 
-Rejection sampling is a technique used in statistics and machine learning to
-generate samples from a probability distribution. It is a simple and intuitive
-method that can be understood without much technical background.
+Rejection sampling is a simple and intuitive method used in statistics and
+machine learning to generate samples from a probability distribution. It is
+often used when it is difficult to directly sample from a target distribution,
+but we can easily sample from a different distribution that is easier to work
+with.
 
-## How does it work?
+In rejection sampling, we generate samples from a proposal distribution, which
+is a distribution that we can sample from easily. We then evaluate the
+probability density function (PDF) of the target distribution at each sample
+point. If the sample point lies below the PDF curve of the target distribution,
+we accept the sample. Otherwise, we reject it and generate a new sample.
 
-1. Define a "proposal distribution" that is easy to sample from.
-2. Generate samples from the proposal distribution.
-3. Evaluate the probability density function (PDF) of the target distribution
-   for each sample.
-4. Accept or reject each sample based on a comparison between the PDF of the
-   target distribution and a uniform random number.
-5. Repeat steps 2-4 until the desired number of samples is obtained.
+The idea behind rejection sampling is that even though the samples are drawn
+from a different distribution, by accepting only those samples that lie under
+the target distribution, we can approximate the target distribution.
 
-## Example
+### Example:
 
-Let's say we want to generate samples from a normal distribution with mean 0 and
-standard deviation 1. We can use rejection sampling to achieve this.
+Let's say we want to estimate the average height of people in a city, but we
+don't have access to the entire population. We can use rejection sampling to
+estimate this average height.
 
-1. We choose a proposal distribution, such as a uniform distribution between -5
-   and 5, which is easy to sample from.
-2. We generate a sample from the proposal distribution, let's say -2.5.
-3. We evaluate the PDF of the target distribution (normal distribution) for the
-   sample -2.5.
-4. We compare the PDF value with a randomly generated number between 0 and 1.
-   If the PDF value is greater than the random number, we accept the sample;
-   otherwise, we reject it.
-5. We repeat steps 2-4 until we obtain the desired number of accepted samples.
+1. We randomly sample a group of people from a different city, for which we
+   know the height distribution.
+2. We calculate the average height of this sample group.
+3. We compare the average height of the sample group with the average height of
+   the people in the city we are interested in.
+4. If the average height of the sample group is close to the average height of
+   the city population, we accept the sample. Otherwise, we reject it and
+   sample a new group.
+5. We repeat steps 1-4 until we have enough accepted samples.
+6. Finally, we calculate the average height of all the accepted samples, which
+   gives us an estimate of the average height of the city population.
 
-## Follow-up Questions
+### Follow-up Questions:
 
-**Q1: Why do we need to use a proposal distribution?**
+**Q1: How do we choose the proposal distribution?**
 
-A1: The proposal distribution is used as an approximation to the target
-distribution. It should be chosen such that it is easy to sample from and
-covers the entire support of the target distribution. Rejection sampling relies
-on the fact that the proposal distribution is easier to sample from than the
-target distribution.
+A1: Choosing the proposal distribution is crucial for the success of rejection
+sampling. Ideally, the proposal distribution should be similar to the target
+distribution, but easier to sample from. The choice of the proposal
+distribution depends on the problem at hand and requires some domain knowledge
+or experimentation.
 
-**Q2: How do we choose the proposal distribution?**
+**Q2: Can rejection sampling be used for any type of probability distribution?**
 
-A2: The choice of the proposal distribution depends on the characteristics of
-the target distribution. It should be similar to the target distribution in
-shape and cover the same range of values. The proposal distribution should also
-be easy to sample from, such as a uniform or Gaussian distribution.
+A2: Rejection sampling can be used for any probability distribution, but its
+effectiveness depends on the shape of the target distribution and the choice of
+the proposal distribution. If the target distribution has a complex shape or
+has heavy tails, rejection sampling may not be the most efficient method.
 
-**Q3: How do we determine the number of samples to generate?**
+### Etymology and History:
 
-A3: The number of samples to generate depends on the desired accuracy and the
-efficiency of the rejection sampling algorithm. It is typically determined
-through experimentation and can be adjusted based on the trade-off between
-accuracy and computational resources.
+The term "rejection sampling" was coined by statistician John von Neumann in
+the 1950s. The method itself, however, has been used in various forms for much
+longer. It is based on the idea of generating samples from a proposal
+distribution and accepting or rejecting them based on their likelihood under
+the target distribution.
 
-## Summary
+### Summary:
 
 Rejection sampling is a technique used to generate samples from a probability
-distribution. It involves using a proposal distribution to generate samples and
-accepting or rejecting them based on a comparison with the target distribution's
-probability density function. It is a simple and intuitive method that can be
-used when sampling directly from the target distribution is difficult.
+distribution when direct sampling is difficult. It involves sampling from a
+proposal distribution and accepting or rejecting the samples based on their
+likelihood under the target distribution. While simple, rejection sampling
+requires careful choice of the proposal distribution and may not be efficient
+for complex target distributions.
 
-## See also
+### See also:
 
-- [Importance Sampling](?concept=importance+sampling&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background):
-  Another sampling technique used in statistics and machine learning.
-- [Markov Chain Monte Carlo (MCMC)](?concept=markov+chain+monte+carlo+mcmc&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background):
-  A more advanced sampling method that can be used when direct sampling is not
-  feasible.
+- [Importance Sampling](?concept=importance+sampling&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background)
+- [Markov Chain Monte Carlo](?concept=markov+chain+monte+carlo&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background)

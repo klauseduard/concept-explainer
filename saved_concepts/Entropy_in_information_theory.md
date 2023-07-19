@@ -1,47 +1,46 @@
 # Entropy in Information Theory
 
-Entropy is a concept in information theory that measures the amount of
-uncertainty or randomness in a set of data. The term "entropy" was adapted by
-Claude Shannon, the father of information theory, from the field of
-thermodynamics, where it describes the measure of disorder in a physical
-system.
-
-Shannon's goal in adapting the term "entropy" was to quantify the amount of
-information contained in a message or data set. He wanted to develop a
-mathematical framework to analyze and transmit information efficiently. By
-measuring the entropy of a data set, Shannon aimed to determine the minimum
-number of bits required to represent the information accurately.
+Entropy in information theory is a measure of the amount of uncertainty or
+randomness in a set of data. It helps us understand how much information is
+needed to describe or represent the data.
 
 ## Follow-up Questions:
 
-1. How does entropy relate to uncertainty or randomness?
-   Entropy is a measure of uncertainty or randomness because it quantifies the
-   unpredictability of a data set. If a data set has high entropy, it means
-   that the data is highly unpredictable and contains a lot of randomness. On
-   the other hand, if a data set has low entropy, it means that the data is
-   more predictable and contains less randomness.
+**Q1: How does entropy relate to uncertainty?**
 
-2. Can you provide an example to illustrate entropy?
-   Sure! Let's consider a coin toss. If you have a fair coin, the entropy of
-   the outcome is high because it is equally likely to land on heads or tails.
-   In this case, you would need one bit of information to represent the
-   outcome (0 for heads, 1 for tails). However, if the coin is biased and more
-   likely to land on heads, the entropy of the outcome decreases because it
-   becomes more predictable. In this case, you would need fewer than one bit to
-   represent the outcome.
+A1: Entropy is high when there is a lot of uncertainty or randomness in the
+data. It means that the data is unpredictable and contains a lot of
+information. On the other hand, low entropy means the data is more predictable
+and contains less information.
+
+**Q2: Can you provide an example to illustrate entropy?**
+
+A2: Imagine you have a coin that is fair and unbiased. When you flip the coin,
+there are two possible outcomes: heads or tails. In this case, the entropy is
+1 bit because it takes 1 bit of information to describe the outcome. However,
+if the coin is biased and more likely to land on heads, the entropy decreases
+because the outcome becomes more predictable.
+
+## Etymology and History:
+
+The concept of entropy was first introduced by Claude Shannon in 1948 as part
+of his groundbreaking work on information theory. Shannon borrowed the term
+"entropy" from thermodynamics, where it represents the measure of disorder or
+randomness in a physical system. In information theory, Shannon defined entropy
+as a measure of the average amount of information needed to describe the
+outcomes of a random variable.
 
 ## Summary:
 
-Entropy in information theory measures the uncertainty or randomness in a set
-of data. It was adapted from the concept of entropy in thermodynamics by
-Claude Shannon to quantify the amount of information contained in a message or
-data set. High entropy indicates high unpredictability, while low entropy
-indicates more predictability. By understanding the entropy of data, we can
-determine the minimum number of bits required to represent the information
-accurately.
+Entropy in information theory is a measure of uncertainty or randomness in a
+set of data. It helps us understand the amount of information needed to
+describe the data. High entropy means more uncertainty and unpredictability,
+while low entropy means more predictability. The concept of entropy was
+introduced by Claude Shannon in 1948 and has since become a fundamental concept
+in information theory.
 
 ## See also:
 
 - [Information Theory](?concept=information+theory&specialist_role=Scientist&target_audience=Manager+without+much+technical+background)
-- [Claude Shannon](?concept=Claude+Shannon&specialist_role=Scientist&target_audience=Manager+without+much+technical+background)
-- [Thermodynamics](?concept=thermodynamics&specialist_role=Scientist&target_audience=Manager+without+much+technical+background)
+- [Randomness](?concept=randomness&specialist_role=Scientist&target_audience=Manager+without+much+technical+background)
+- [Data Compression](?concept=data+compression&specialist_role=Scientist&target_audience=Manager+without+much+technical+background)

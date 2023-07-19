@@ -1,44 +1,55 @@
-# Bag-of-Words Methods
+**Bag-of-Words Methods**
 
-The Bag-of-Words (BoW) method is a simple and popular technique used in natural language processing (NLP) to represent text data. It treats a document as a "bag" of its words, disregarding grammar and word order. This method is often used for tasks like text classification, sentiment analysis, and information retrieval.
+Bag-of-Words methods are a simple way to represent text data in a numerical
+format that can be used for machine learning tasks. It treats each document as
+a "bag" of its constituent words, disregarding grammar and word order.
 
-## How does it work?
+**Follow-up Questions:**
 
-1. **Tokenization**: The text is split into individual words or tokens.
-2. **Vocabulary Creation**: A unique set of words, called the vocabulary, is created from all the tokens in the text corpus.
-3. **Vectorization**: Each document is represented as a vector, where each element corresponds to a word in the vocabulary. The value of each element represents the frequency or presence of the word in the document.
+1. How does the Bag-of-Words method work?
+2. What are the advantages and limitations of using Bag-of-Words?
+3. Can you provide an example of how Bag-of-Words is used?
 
-## Example:
+**Answers:**
 
-Let's say we have three documents:
+1. The Bag-of-Words method works by creating a vocabulary of all unique words
+   in a given set of documents. Each document is then represented as a vector,
+   where each element of the vector corresponds to the count or presence of a
+   word from the vocabulary. The order of the words is ignored, and only their
+   frequency or presence matters.
 
-1. Document 1: "I love cats."
-2. Document 2: "I hate dogs."
-3. Document 3: "I love dogs and cats."
+2. Advantages of Bag-of-Words include simplicity and efficiency in
+   representation. It allows for easy comparison and analysis of text data. However,
+   it loses the sequential and contextual information present in the text,
+   which can be important for certain tasks like sentiment analysis or machine
+   translation.
 
-The vocabulary would be: ["I", "love", "hate", "cats", "dogs", "and"]
+3. Let's say we have three documents: "I love cats", "I hate dogs", and "I
+   love dogs". The vocabulary would be: ["I", "love", "cats", "hate", "dogs"].
+   Using Bag-of-Words, the documents would be represented as vectors:
 
-The vector representation of each document would be:
+   - "I love cats": [1, 1, 1, 0, 0]
+   - "I hate dogs": [1, 0, 0, 1, 1]
+   - "I love dogs": [1, 1, 0, 0, 1]
 
-1. Document 1: [1, 1, 0, 1, 0, 0]
-2. Document 2: [1, 0, 1, 0, 1, 0]
-3. Document 3: [1, 1, 0, 1, 1, 1]
+**Etymology and History:**
 
-## Follow-up Questions:
+The term "Bag-of-Words" originates from the idea of treating a document as a
+bag containing all its words, without any specific order or structure. It was
+first introduced in the field of natural language processing and information
+retrieval.
 
-**Q1: How does the Bag-of-Words method handle word order?**
+**Summary:**
 
-The Bag-of-Words method ignores word order and treats each document as an unordered collection of words. This can be a limitation as it loses the contextual information provided by word order.
+Bag-of-Words methods provide a simple way to represent text data numerically by
+ignoring word order and grammar. It has advantages in terms of simplicity and
+efficiency but lacks contextual information. It is widely used in various
+natural language processing tasks.
 
-**Q2: How does the Bag-of-Words method handle the importance of words?**
+**See also:**
 
-The Bag-of-Words method typically represents words based on their frequency or presence in a document. However, it does not consider the importance or meaning of the words. This can be addressed by using techniques like TF-IDF (Term Frequency-Inverse Document Frequency) to weigh the importance of words.
-
-## Summary:
-
-The Bag-of-Words method is a simple technique used to represent text data by treating documents as a collection of words. It is widely used in NLP for tasks like text classification and sentiment analysis. However, it disregards word order and does not consider the importance of words.
-
-## See also:
-
-- [TF-IDF](?concept=tf-idf&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background): A method to weigh the importance of words in a document.
-- [Word Embeddings](?concept=word+embeddings&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background): Techniques that capture the semantic meaning of words.
+- [TF-IDF](?concept=tf-idf&specialist_role=ML+Engineer&target_audience=Manager+without+much+technical+background):
+  A weighting scheme used to improve Bag-of-Words representation.
+- [Word Embeddings](?concept=word+embeddings&specialist_role=ML+Engineer&target_audience=Manager+without+much+technical+background):
+  A more advanced representation technique that captures semantic relationships
+  between words.

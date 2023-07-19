@@ -1,57 +1,47 @@
-# Conditional Entropy
+**Conditional Entropy**
 
-Conditional entropy is a measure of uncertainty or randomness in a random
-variable, given the knowledge of another random variable. In simpler terms, it
-tells us how much information is needed, on average, to describe an outcome of
-a random variable when we already know the outcome of another related random
-variable.
+Conditional entropy is a measure of the average amount of information needed to describe the outcome of a random variable, given that we have information about another random variable. In simpler terms, it quantifies the uncertainty of one random variable when we have knowledge about another random variable.
 
-## Example:
-Let's say we have a dataset of employees in a company, and we want to analyze
-their job satisfaction based on their salary and years of experience. We can
-consider job satisfaction as one random variable, and salary and years of
-experience as two other random variables.
+**Follow-up Questions:**
 
-The conditional entropy of job satisfaction given salary and years of experience
-will tell us how much additional information we need to describe the job
-satisfaction, given that we already know the salary and years of experience of
-an employee.
+1. How is conditional entropy different from regular entropy?
+2. How is conditional entropy calculated?
+3. Can you provide an example to illustrate conditional entropy?
 
-## Follow-up Questions:
+**Answers:**
 
-**Q1: How is conditional entropy different from regular entropy?**
+1. Conditional entropy differs from regular entropy in that it takes into account the additional information provided by another random variable. Regular entropy measures the uncertainty of a single random variable, while conditional entropy measures the uncertainty of one random variable given the knowledge of another random variable.
 
-A1: Regular entropy measures the average amount of information needed to
-describe the outcome of a single random variable. Conditional entropy, on the
-other hand, measures the average amount of information needed to describe the
-outcome of a random variable, given the knowledge of another related random
-variable.
+2. Conditional entropy is calculated using the formula:
 
-**Q2: How is conditional entropy calculated?**
+   ![Conditional Entropy Formula](https://latex.codecogs.com/png.latex?H%28X%7CY%29%20%3D%20-%20%5Csum_%7Bx%20%5Cin%20X%7D%20%5Csum_%7By%20%5Cin%20Y%7D%20P%28x%2Cy%29%20%5Clog%20%5Cfrac%7BP%28x%2Cy%29%7D%7BP%28y%29%7D)
 
-A2: Conditional entropy is calculated by summing the product of the probability
-of each outcome of the first random variable and the entropy of the second
-random variable, given that outcome.
+   Where:
+   - H(X|Y) represents the conditional entropy of random variable X given random variable Y.
+   - P(x,y) represents the joint probability distribution of X and Y.
+   - P(y) represents the probability distribution of Y.
 
-**Q3: Can conditional entropy be zero?**
+3. Let's consider an example to illustrate conditional entropy. Suppose we have two random variables, X and Y, representing the weather conditions and the corresponding outdoor activities. The possible values for X are sunny, cloudy, and rainy, while the possible values for Y are playing soccer, going for a walk, and staying indoors.
 
-A3: Yes, conditional entropy can be zero. It means that the second random
-variable is completely determined by the first random variable. In other words,
-knowing the outcome of the first random variable eliminates all uncertainty
-about the outcome of the second random variable.
+   The joint probability distribution and conditional probability distribution are as follows:
 
-## Summary:
+   ![Joint Probability Distribution](https://latex.codecogs.com/png.latex?%5Cbegin%7Barray%7D%7Bcccc%7D%20%26%20%5Ctext%7Bsunny%7D%20%26%20%5Ctext%7Bcloudy%7D%20%26%20%5Ctext%7Brainy%7D%20%5C%5C%20%5Ctext%7Bplaying%20soccer%7D%20%26%200.3%20%26%200.1%20%26%200.1%20%5C%5C%20%5Ctext%7Bgoing%20for%20a%20walk%7D%20%26%200.2%20%26%200.2%20%26%200.1%20%5C%5C%20%5Ctext%7Bstaying%20indoors%7D%20%26%200.1%20%26%200.1%20%26%200.1%20%5Cend%7Barray%7D)
 
-Conditional entropy measures the average amount of additional information
-needed to describe the outcome of a random variable, given the knowledge of
-another related random variable. It helps us understand the uncertainty or
-randomness in a random variable when we already know the outcome of another
-related random variable.
 
-## See also:
+   To calculate the conditional entropy H(X|Y), we use the formula mentioned earlier. The calculation involves summing the products of joint probabilities and logarithms of conditional probabilities.
 
-- [Entropy](?concept=entropy&specialist_role=Information+theorist&target_audience=Manager+without+much+technical+background):
-  Explains the concept of entropy, which is the basis for understanding
-  conditional entropy.
-- [Joint Entropy](?concept=joint+entropy&specialist_role=Information+theorist&target_audience=Manager+without+much+technical+background):
-  Describes the entropy of two or more random variables considered together.
+   After performing the calculations, we find that H(X|Y) is approximately 1.57 bits.
+
+**Etymology and History:**
+
+The concept of entropy was introduced by Claude Shannon in his groundbreaking paper "A Mathematical Theory of Communication" published in 1948. Shannon defined entropy as a measure of the average amount of information required to describe the outcome of a random variable. The concept of conditional entropy was later developed as an extension of entropy to consider the uncertainty of one random variable given knowledge about another random variable.
+
+**Summary:**
+
+Conditional entropy measures the uncertainty of one random variable given knowledge about another random variable. It quantifies the average amount of information needed to describe the outcome of a random variable when we have information about another random variable. Conditional entropy is calculated using the joint probability distribution and conditional probability distribution of the random variables involved.
+
+**See also:**
+
+- [Entropy](?concept=entropy&specialist_role=Information+theorist&target_audience=Software+engineer): Measures the uncertainty of a single random variable.
+- [Joint Probability Distribution](?concept=joint+probability+distribution&specialist_role=Information+theorist&target_audience=Software+engineer): Describes the probability distribution of multiple random variables together.
+- [Conditional Probability Distribution](?concept=conditional+probability+distribution&specialist_role=Information+theorist&target_audience=Software+engineer): Describes the probability distribution of one random variable given the knowledge of another random variable.

@@ -1,45 +1,79 @@
-**Concept: BLEU Score**
+## BLEU Score
 
-The BLEU (Bilingual Evaluation Understudy) score is a metric used to measure the quality of machine-generated translations by comparing them to human-generated translations. It provides a numerical value between 0 and 1, where a higher score indicates a better translation.
+The BLEU score is a metric used to measure the quality of machine-generated
+text by comparing it to human-generated reference text. It stands for
+"Bilingual Evaluation Understudy" and is commonly used in the field of natural
+language processing.
 
-**Follow-up Questions:**
+The BLEU score calculates the similarity between the machine-generated text
+and the reference text by comparing the n-grams (contiguous sequences of n
+words) present in both. It assigns a score between 0 and 1, where a higher
+score indicates a better match with the reference text.
 
-1. How does BLEU score work?
-   
-   BLEU score compares the machine-generated translation with one or more human-generated translations. It counts the number of n-grams (contiguous sequences of n words) that appear in both the machine and human translations. The score is calculated based on the precision of these n-grams, considering both their presence and their order in the translations.
+### Example:
 
-2. What does a BLEU score of 1 mean?
-   
-   A BLEU score of 1 means that the machine-generated translation is identical to the human-generated translation. However, it is rare to achieve a perfect score, as there are often multiple valid ways to translate a sentence.
+Let's say we have a machine translation system that translates English
+sentences into French. We want to evaluate the quality of the translations
+produced by the system using the BLEU score.
 
-**Example:**
+Reference sentence (human-generated): "The cat is sitting on the mat."
 
-Let's consider a simple example to understand BLEU score calculation. Suppose we have a machine-generated translation and two human-generated translations for the sentence "The cat is sitting on the mat."
+Machine-generated translation: "Le chat est assis sur le tapis."
 
-Machine-generated translation: "The cat sits on the mat."
-Human-generated translation 1: "The cat is sitting on the mat."
-Human-generated translation 2: "On the mat, the cat is sitting."
+To calculate the BLEU score, we compare the n-grams present in both the
+reference and the machine-generated translation. Let's consider n=2 (bigrams)
+for simplicity.
 
-To calculate the BLEU score, we compare the machine-generated translation with the two human-generated translations. We count the number of overlapping n-grams and calculate the precision.
+The bigrams present in the reference sentence are: "The cat", "cat is",
+"is sitting", "sitting on", "on the", "the mat".
 
-In this case, let's consider 1-gram precision (unigrams). The machine-generated translation has 5 unigrams, out of which 4 are present in the first human-generated translation and 5 are present in the second human-generated translation. The precision is calculated as the ratio of the number of matching unigrams to the total number of unigrams in the machine-generated translation.
+The bigrams present in the machine-generated translation are: "Le chat",
+"chat est", "est assis", "assis sur", "sur le", "le tapis".
 
-Precision for the first human-generated translation: 4/5 = 0.8
-Precision for the second human-generated translation: 5/5 = 1.0
+Out of these 6 bigrams, only 2 ("le chat" and "sur le") are present in both
+the reference and the machine-generated translation.
 
-The BLEU score is the geometric mean of the precisions, considering different n-gram sizes. In this example, let's assume we only consider unigrams.
+Therefore, the BLEU score for this translation would be 2/6 = 0.33.
 
-BLEU score = sqrt(0.8 * 1.0) = 0.894
+### Follow-up Questions:
 
-**Summary:**
+1. Why is the BLEU score important?
+   - The BLEU score helps us assess the quality of machine-generated text,
+     such as translations or summaries. It provides a quantitative measure
+     that can be used to compare different systems or evaluate improvements
+     made to a system over time.
 
-The BLEU score is a metric used to evaluate the quality of machine-generated translations. It compares the machine translation with one or more human translations, counting the number of overlapping n-grams. A higher BLEU score indicates a better translation, with a score of 1 representing a perfect match.
+2. How is the BLEU score calculated?
+   - The BLEU score is calculated by comparing the n-grams (contiguous
+     sequences of n words) present in both the reference and the
+     machine-generated text. The score is based on the precision of the
+     n-grams, taking into account the brevity penalty to avoid favoring
+     shorter translations.
 
-**See also:**
+3. What is the range of BLEU scores?
+   - The BLEU score ranges from 0 to 1, where 1 indicates a perfect match
+     between the machine-generated text and the reference text.
 
-- [N-gram](?concept=n-gram&specialist_role=ML+Engineer&target_audience=Manager+without+much+technical+background):
-  Understanding the concept of n-grams, which are contiguous sequences of n
-  words.
-- [Precision and Recall](?concept=precision+and+recall&specialist_role=ML+Engineer&target_audience=Manager+without+much+technical+background):
-  Exploring the concepts of precision and recall, which are used in calculating
-  the BLEU score.
+### Etymology and History:
+
+The term "BLEU" stands for "Bilingual Evaluation Understudy" and was coined
+by researchers at IBM in the early 2000s. It was developed as a metric to
+evaluate the quality of machine translation systems. Since then, it has
+become widely adopted in the field of natural language processing for
+evaluating various text generation tasks.
+
+### Summary:
+
+The BLEU score is a metric used to measure the quality of machine-generated
+text by comparing it to human-generated reference text. It calculates the
+similarity between the two texts based on the presence of n-grams. The score
+ranges from 0 to 1, with a higher score indicating a better match with the
+reference text. The BLEU score is widely used in natural language processing
+to evaluate machine translation systems and other text generation tasks.
+
+### See also:
+
+- [N-gram](?concept=n-gram&specialist_role=Software+architect&target_audience=Manager+without+much+technical+background):
+  A contiguous sequence of n words.
+- [Precision and Recall](?concept=precision+and+recall&specialist_role=Software+architect&target_audience=Manager+without+much+technical+background):
+  Metrics used to evaluate the performance of information retrieval systems.

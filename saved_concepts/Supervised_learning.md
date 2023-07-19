@@ -1,59 +1,47 @@
-# Supervised Learning
-
 Supervised learning is a type of machine learning where an algorithm learns
-from labeled data to make predictions or decisions. In this approach, we have
-a dataset that consists of input variables (features) and corresponding output
-variables (labels). The goal is to train a model that can accurately predict
-the output variable for new, unseen input data.
+from labeled data to make predictions or decisions. In this approach, the
+algorithm is provided with a set of input data along with their corresponding
+correct outputs. The algorithm then learns to map the inputs to the outputs by
+finding patterns and relationships in the data.
 
-## Example
+Follow-up questions:
 
-Let's say we want to build a model that can predict whether an email is spam
-or not. We would start by collecting a dataset of emails, where each email is
-labeled as either spam or not spam. Each email in the dataset would have
-features such as the subject, sender, and content of the email. The label
-would be either "spam" or "not spam".
+1. How does supervised learning work?
+Supervised learning works by training an algorithm using a labeled dataset.
+The algorithm analyzes the input data and tries to find patterns or
+relationships between the inputs and the corresponding outputs. Once trained,
+the algorithm can then make predictions or decisions on new, unseen data.
 
-We would then use this labeled dataset to train a supervised learning model.
-The model would learn patterns and relationships between the features of the
-emails and their corresponding labels. Once the model is trained, we can use it
-to predict whether new, unseen emails are spam or not.
+2. What are some examples of supervised learning?
+One example is email spam detection. The algorithm is trained using a dataset
+of emails labeled as spam or not spam. It learns to recognize patterns in the
+emails that indicate whether they are spam or not. Once trained, the algorithm
+can classify new emails as spam or not spam.
 
-## Follow-up Questions
+Another example is image recognition. The algorithm is trained using a dataset
+of images labeled with their corresponding objects or categories. It learns to
+identify patterns and features in the images that help it recognize objects or
+categories in new, unseen images.
 
-**Q1: How does the model learn from the labeled data?**
+Etymology and history:
+The term "supervised learning" comes from the idea that the algorithm is
+supervised or guided by the labeled data during the learning process. The
+concept of supervised learning has been around since the early days of machine
+learning. It has its roots in the field of statistics and has been extensively
+studied and developed over the years.
 
-The model learns from the labeled data by finding patterns and relationships
-between the input features and the output labels. It tries to find the best
-function that maps the input features to the output labels.
-
-**Q2: What types of algorithms are used in supervised learning?**
-
-There are various algorithms used in supervised learning, such as decision
-trees, random forests, support vector machines, and neural networks. Each
-algorithm has its own strengths and weaknesses, and the choice of algorithm
-depends on the specific problem and the characteristics of the dataset.
-
-**Q3: How do we measure the performance of a supervised learning model?**
-
-The performance of a supervised learning model is typically measured using
-metrics such as accuracy, precision, recall, and F1 score. These metrics
-provide an indication of how well the model is able to make correct predictions
-on unseen data.
-
-## Summary
-
+Summary:
 Supervised learning is a machine learning approach where an algorithm learns
-from labeled data to make predictions or decisions. It involves training a
-model using input features and corresponding output labels. The model learns
-patterns and relationships in the data and can be used to predict the output
-for new, unseen data.
+from labeled data to make predictions or decisions. It works by finding
+patterns and relationships in the data and using them to make predictions on
+new, unseen data. Examples include email spam detection and image recognition.
 
-## See also
-
-- Unsupervised learning: In contrast to supervised learning, unsupervised
-  learning involves finding patterns and relationships in unlabeled data.
-- Classification: A specific type of supervised learning where the output
-  variable is categorical.
-- Regression: Another type of supervised learning where the output variable is
-  continuous.
+See also:
+- [Unsupervised learning](?concept=unsupervised+learning&specialist_role=ML+Engineer&target_audience=Manager+without+much+technical+background):
+  A type of machine learning where the algorithm learns from unlabeled data.
+- [Classification](?concept=classification&specialist_role=ML+Engineer&target_audience=Manager+without+much+technical+background):
+  A specific task in supervised learning where the algorithm assigns labels to
+  input data based on predefined categories.
+- [Regression](?concept=regression&specialist_role=ML+Engineer&target_audience=Manager+without+much+technical+background):
+  Another specific task in supervised learning where the algorithm predicts
+  continuous values based on input data.

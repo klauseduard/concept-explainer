@@ -1,48 +1,83 @@
-**Concept of tf-idf:**
+## Explanation of tf-idf
 
-Tf-idf stands for term frequency-inverse document frequency. It is a numerical
-statistic that reflects how important a word is to a document in a collection
-or corpus. The tf-idf value increases proportionally to the number of times a
-word appears in a document but is offset by the frequency of the word in the
-corpus. This helps to highlight words that are unique to a document and
-downplay common words.
+TF-IDF stands for Term Frequency-Inverse Document Frequency. It is a numerical statistic that reflects how important a word is to a document in a collection or corpus of documents. 
 
-**Follow-up questions:**
+In simpler terms, tf-idf helps us understand the significance of a word in a document by considering two factors:
+
+1. Term Frequency (TF): This measures how frequently a word appears in a document. The more times a word appears, the higher its TF value.
+
+2. Inverse Document Frequency (IDF): This measures how important a word is across the entire collection of documents. Words that appear in many documents have a lower IDF value, while words that appear in only a few documents have a higher IDF value.
+
+By combining these two factors, tf-idf gives us a way to identify words that are both frequent within a document and unique to that document. This helps us understand the relevance of words in a document compared to the entire collection.
+
+## Follow-up Questions
 
 1. How is tf-idf calculated?
+   - TF is calculated by counting the number of times a word appears in a document and dividing it by the total number of words in that document.
+   - IDF is calculated by taking the logarithm of the total number of documents divided by the number of documents containing the word, and then adding 1 to avoid division by zero.
+   - Finally, the TF and IDF values are multiplied together to get the tf-idf score for each word in a document.
+
 2. What is the purpose of using tf-idf?
-3. Can you provide an example of how tf-idf is used?
+   - Tf-idf is commonly used in information retrieval and text mining tasks. It helps in tasks such as document classification, search engine ranking, and text summarization.
+   - By giving higher weight to words that are both frequent within a document and unique to that document, tf-idf helps in identifying important keywords and distinguishing between documents.
 
-**Answers to the follow-up questions:**
+## Example
 
-1. Tf-idf is calculated by multiplying two values: term frequency (tf) and
-inverse document frequency (idf). Term frequency is the number of times a word
-appears in a document, while inverse document frequency is the logarithmically
-scaled inverse fraction of the documents that contain the word. The formula
-for tf-idf is: tf-idf = tf * idf.
+Let's consider a collection of three documents:
 
-2. The purpose of using tf-idf is to determine the importance of a word in a
-document relative to the entire corpus. It helps in identifying words that are
-unique or significant to a particular document. Tf-idf is commonly used in
-information retrieval, text mining, and natural language processing tasks.
+Document 1: "Machine learning is interesting."
+Document 2: "Machine learning is challenging."
+Document 3: "Deep learning is interesting."
 
-3. Example: Let's say we have a collection of documents about animals, and we
-want to find the most important words in each document. We can calculate the
-tf-idf values for each word in each document. For instance, if the word "lion"
-appears 5 times in a document that contains 100 words, and it appears in 10 out
-of 1000 documents in the corpus, the tf-idf value for "lion" in that document
-would be 5/100 * log(1000/10).
+To calculate the tf-idf scores for the words in these documents, we follow these steps:
 
-**Summary:**
+1. Calculate the TF for each word in each document.
+   - TF("Machine") in Document 1 = 1/4 = 0.25
+   - TF("learning") in Document 1 = 1/4 = 0.25
+   - TF("is") in Document 1 = 1/4 = 0.25
+   - TF("interesting") in Document 1 = 1/4 = 0.25
+   - TF("Machine") in Document 2 = 1/4 = 0.25
+   - TF("learning") in Document 2 = 1/4 = 0.25
+   - TF("is") in Document 2 = 1/4 = 0.25
+   - TF("challenging") in Document 2 = 1/4 = 0.25
+   - TF("Deep") in Document 3 = 1/3 = 0.33
+   - TF("learning") in Document 3 = 1/3 = 0.33
+   - TF("is") in Document 3 = 1/3 = 0.33
+   - TF("interesting") in Document 3 = 1/3 = 0.33
 
-Tf-idf is a measure of the importance of a word in a document relative to the
-entire corpus. It helps to identify words that are unique or significant to a
-particular document. By calculating the tf-idf values for each word, we can
-highlight important words and downplay common words.
+2. Calculate the IDF for each word.
+   - IDF("Machine") = log(3/2 + 1) = log(2) = 0.30
+   - IDF("learning") = log(3/3 + 1) = log(2) = 0.30
+   - IDF("is") = log(3/3 + 1) = log(2) = 0.30
+   - IDF("interesting") = log(3/2 + 1) = log(2) = 0.30
+   - IDF("challenging") = log(3/1 + 1) = log(2.5) = 0.40
+   - IDF("Deep") = log(3/1 + 1) = log(2.5) = 0.40
 
-**See also:**
+3. Calculate the tf-idf score for each word in each document.
+   - tf-idf("Machine") in Document 1 = 0.25 * 0.30 = 0.075
+   - tf-idf("learning") in Document 1 = 0.25 * 0.30 = 0.075
+   - tf-idf("is") in Document 1 = 0.25 * 0.30 = 0.075
+   - tf-idf("interesting") in Document 1 = 0.25 * 0.30 = 0.075
+   - tf-idf("Machine") in Document 2 = 0.25 * 0.30 = 0.075
+   - tf-idf("learning") in Document 2 = 0.25 * 0.30 = 0.075
+   - tf-idf("is") in Document 2 = 0.25 * 0.30 = 0.075
+   - tf-idf("challenging") in Document 2 = 0.25 * 0.40 = 0.10
+   - tf-idf("Deep") in Document 3 = 0.33 * 0.40 = 0.132
+   - tf-idf("learning") in Document 3 = 0.33 * 0.30 = 0.099
+   - tf-idf("is") in Document 3 = 0.33 * 0.30 = 0.099
+   - tf-idf("interesting") in Document 3 = 0.33 * 0.30 = 0.099
 
-- [Bag-of-words](?concept=bag-of-words&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background):
-  Another technique used in natural language processing.
-- [Word embeddings](?concept=word+embeddings&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background):
-  A more advanced representation of words in a vector space.
+Based on these tf-idf scores, we can see that the word "challenging" has a higher score in Document 2, indicating its importance in that document compared to the others.
+
+## Etymology and History
+
+The term "tf-idf" was coined by Karen Spärck Jones, a British computer scientist, in the 1970s. She introduced the concept as a way to improve information retrieval systems by considering both term frequency and document frequency.
+
+## Summary
+
+TF-IDF is a measure that helps us understand the importance of words in a document by considering their frequency within the document and across a collection of documents. It is widely used in various text mining and information retrieval tasks to identify important keywords and distinguish between documents.
+
+## See also
+
+- [Bag-of-Words](?concept=Bag-of-Words&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background): Another text representation technique commonly used in machine learning.
+- [Word Embeddings](?concept=Word+Embeddings&specialist_role=Machine+learning+specialist&target_audience=Manager+without+much+technical+background): A more advanced technique for representing words as dense vectors.
