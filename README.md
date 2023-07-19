@@ -108,6 +108,6 @@ MIT
 
 ## Contact
 
-Klaus Eduard - klauseduard@domain.com
+Klaus-Eduard Runnel - klaus.eduard@gmail.com
 
 Project Link: [https://github.com/klauseduard/concept-explainer](https://github.com/klauseduard/concept-explainer)
