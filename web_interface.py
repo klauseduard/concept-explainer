@@ -113,14 +113,6 @@ def search():
     return render_template('search.html', scores=scores, query=query)
 
 
-#@app.route('/search_semantic', methods=['GET'])
-#def search_semantic():
-#    query = request.args.get('query', '')
-#    scores = []
-#    if query:
-#        scores = get_scores(query, model, embeddings, filenames)
-#    return render_template('search_semantic.html', scores=scores, query=query)
-
 @app.route('/search_semantic', methods=['GET'])
 def search_semantic():
     query = request.args.get('query', '')
