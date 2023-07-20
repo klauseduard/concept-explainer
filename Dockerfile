@@ -14,10 +14,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 80
 
 # Define environment variables
-ENV OPENAI_API_KEY=sk-???
-ENV REQUIRE_AUTH=True
-ENV AUTH_USERNAME=manager
-ENV AUTH_PASSWORD=secret
+#ENV REQUIRE_AUTH=True
+#ENV AUTH_USERNAME=manager
+#ENV AUTH_PASSWORD=secret
+#ENV OPENAI_API_KEY=?
 
 # Run web interface when the container launches
 CMD ["python", "web_interface.py"]
