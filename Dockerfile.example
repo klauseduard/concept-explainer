@@ -13,8 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
-# Define environment variable
-ENV NAME World
+# Define environment variables
+ENV OPENAI_API_KEY=sk-???
+ENV REQUIRE_AUTH=True
+ENV AUTH_USERNAME=manager
+ENV AUTH_PASSWORD=secret
 
 # Run web interface when the container launches
 CMD ["python", "web_interface.py"]
