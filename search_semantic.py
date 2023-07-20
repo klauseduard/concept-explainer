@@ -6,20 +6,6 @@ import json
 from sklearn.metrics.pairwise import cosine_similarity
 import sys
 
-#def build_corpus_and_hashes(directory):
-#    corpus = []
-#    filenames = []
-#    hashes = {}
-#    for filename in os.listdir(directory):
-#        if filename.endswith(".md"):
-#            with open(os.path.join(directory, filename), 'r') as f:
-#                content = f.read()
-#                corpus.append(content)
-#                filenames.append(filename.replace('.md', ''))
-#                md5_hash = hashlib.md5(content.encode()).hexdigest()
-#                hashes[filename.replace('.md', '')] = md5_hash
-#    return corpus, filenames, hashes
-
 def build_corpus_and_hashes(directory):
     corpus = []
     filenames = []
