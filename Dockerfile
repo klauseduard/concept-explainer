@@ -4,6 +4,12 @@ FROM python:3.8-slim-buster
 # Set the working directory in the container to /app
 WORKDIR /app
 
+# Copy the files into the container
+COPY embeddings.npy indices.json hashes.json /app/
+
+# Set write permissions for the files
+RUN chmod +w /app/embeddings.npy /app/indices.json /app/hashes.json
+
 # Add the current directory contents into the container at /app
 ADD . /app
 
