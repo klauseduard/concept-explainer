@@ -32,9 +32,9 @@ indices_path = 'indices.json'
 
 model = SentenceTransformer(model_name)
 #embeddings, hashes = load_embeddings_and_hashes(embeddings_path, hashes_path, indices_path)
+ss_filenames, corpus, old_hashes = build_corpus_and_hashes(directory)
 embeddings, hashes = load_embeddings_and_hashes(embeddings_path, hashes_path)
 
-ss_filenames, corpus, old_hashes = build_corpus_and_hashes(directory)
 with open(indices_path, 'r') as f:
     indices = json.load(f)
 
