@@ -60,3 +60,6 @@ def write_to_file(concept, content):
     except Exception as e:
         print(f"Error writing to file: {e}")
 
+    return filename
+
+

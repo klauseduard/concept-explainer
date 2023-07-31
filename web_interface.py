@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from sentence_transformers import SentenceTransformer
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, send_from_directory
 from flask_httpauth import HTTPBasicAuth
 from chat_generator import generate_chat, write_to_file
 import mistune
@@ -65,8 +65,10 @@ def index():
         chat_content = generate_chat(concept, specialist_role, target_audience, additional_context)
         if chat_content:
             html_content = mistune.markdown(chat_content)
-            write_to_file(concept, chat_content)
-            return render_template('template.html', result=html_content, concept=concept, specialist_role=specialist_role, target_audience=target_audience, additional_context=additional_context)
+            filename = write_to_file(concept, chat_content)
+            return render_template('template.html', result=html_content, filename=filename,
+                               concept=concept, specialist_role=specialist_role,
+                               target_audience=target_audience, additional_context=additional_context)
         else:
             return render_template('template.html', error="Error generating chat.", concept=concept, specialist_role=specialist_role, target_audience=target_audience, additional_context=additional_context)
 
@@ -120,6 +122,11 @@ def search_semantic():
     if query:
         scores = get_semantic_scores(query, model, embeddings, ss_filenames, indices)
     return render_template('search_semantic.html', scores=scores, query=query)
+
+@app.route('/download/<filename>', methods=['GET'])
+def download(filename):
+    directory = os.path.join(app.root_path, './')
+    return send_from_directory(directory, f"{filename}", as_attachment=True)
 
 
 

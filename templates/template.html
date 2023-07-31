@@ -6,6 +6,9 @@
         {% if result %}
             <h2>Explanation:</h2>
             <div>{{ result | safe }}</div>
+            {% if filename %}
+                <a class="btn" href="{{ url_for('download', filename=filename) }}">Download as markdown</a>
+            {% endif %}
         {% endif %}
         {% if error %}
             <p>{{ error }}</p>
