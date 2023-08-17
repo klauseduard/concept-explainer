@@ -12,6 +12,9 @@
     <input type="text" id="additional_context" name="additional_context" value="{{ additional_context or '' }}" placeholder="(empty)">
 
     <div class="spinner" id="spinner"></div>
+    <div class="warning">
+        <p><strong>Warning:</strong> LLM may provide inaccurate or speculative information when asked to explain a concept it is not familiar with. Please verify any information provided with other reliable sources.</p>
+    </div>
     <div class="flex-container">
         <input type="submit" value="Explain" class="btn">
         <a href="{{ url_for('concepts') }}" class="btn">Browse presaved concepts</a>
