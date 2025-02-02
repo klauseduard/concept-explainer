@@ -1,5 +1,7 @@
 # Web Interface Search Initialization Issue
 
+Fixes #12
+
 ## Problem
 The web interface requires pre-built search indices (`embeddings.npy`, `indices.json`, and `hashes.json`) to function properly, but these files are not automatically generated. Currently, users need to manually run `search_semantic.py` before starting the web interface, which is not documented and leads to errors.
 
