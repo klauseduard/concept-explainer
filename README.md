@@ -12,6 +12,7 @@ Concept Explainer is a project that leverages the OpenAI API via Langchain to ex
 - [Implementation Notes](#implementation-notes)
 - [Markdown Reader](#markdown-reader)
 - [Model Configuration](#model-configuration)
+- [LLM Provider Configuration](#llm-provider-configuration)
 
 ## Installation
 
@@ -142,6 +143,104 @@ Different models have different pricing:
 - GPT-4 models provide higher quality but at higher cost
 
 Please review OpenAI's pricing at: https://openai.com/pricing
+
+## LLM Provider Configuration
+
+The application supports two LLM providers:
+1. OpenAI (cloud-based, requires API key)
+2. Ollama (local execution, free, works offline)
+
+### OpenAI Provider
+
+To use OpenAI's API (default provider):
+
+1. Set up your OpenAI account and get an API key
+2. Configure your .env file:
+```bash
+LLM_PROVIDER=openai
+OPENAI_API_KEY=your-api-key-here
+OPENAI_MODEL=gpt-3.5-turbo     # or other supported model
+OPENAI_TEMPERATURE=0.2         # 0.0 to 2.0
+```
+
+Available OpenAI models:
+- `gpt-3.5-turbo` (default) - Good balance of performance and cost
+- `gpt-3.5-turbo-0125` - Latest GPT-3.5 version with improvements
+- `gpt-4` - Higher quality but more expensive
+- `gpt-4-0125` - Latest GPT-4 version with improvements
+
+### Ollama Provider
+
+To use Ollama (local execution):
+
+1. Install Ollama from https://ollama.ai
+2. Start the Ollama server (do this once, keep it running):
+```bash
+ollama serve &
+```
+3. Pull and warm up your model (do this once per model):
+```bash
+# Pull the model
+ollama pull mistral-small    # or other model like llama2, codellama, etc.
+
+# Warm up the model with a test prompt
+# This loads it into memory and makes subsequent requests faster
+ollama run mistral-small "hi"
+```
+4. Configure your .env file:
+```bash
+LLM_PROVIDER=ollama
+OLLAMA_HOST=http://localhost:11434
+OLLAMA_MODEL=mistral-small    # or other installed model
+OLLAMA_TEMPERATURE=0.2       # 0.0 to 2.0
+```
+
+For best performance:
+- Keep the Ollama server running in the background
+- Pre-warm models you plan to use
+- Consider your hardware resources when choosing models
+
+Recommended Ollama models:
+- `mistral-small` - Fast, efficient, good quality
+- `llama2` - Strong general performance
+- `codellama` - Excellent for technical concepts
+- `neural-chat` - Good conversational abilities
+
+Benefits of using Ollama:
+- Free to use
+- Complete privacy - all data stays local
+- Works offline
+- No API key required
+- Lower latency
+- Customizable models
+
+### Temperature Setting
+
+For both providers, the temperature setting controls response creativity:
+- Range: 0.0 to 2.0
+- Lower values (e.g., 0.2) = More focused, consistent responses
+- Higher values (e.g., 0.8) = More creative, varied responses
+
+Example for more creative responses:
+```bash
+# OpenAI
+OPENAI_TEMPERATURE=0.8
+
+# Ollama
+OLLAMA_TEMPERATURE=0.8
+```
+
+### Provider Comparison
+
+| Feature | OpenAI | Ollama |
+|---------|--------|---------|
+| Cost | Pay per use | Free |
+| Privacy | Data sent to cloud | All data stays local |
+| Internet Required | Yes | No |
+| API Key Required | Yes | No |
+| Response Speed | Network dependent | Local hardware dependent |
+| Model Quality | Very high | Good |
+| Resource Usage | Cloud-based | Uses local CPU/GPU |
 
 ## License
 
