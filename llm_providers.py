@@ -88,6 +88,38 @@ class OpenAIProvider(LLMProvider):
 class OllamaProvider(LLMProvider):
     """Ollama implementation of LLM provider."""
     
+    def __init__(self):
+        """Initialize the provider and warm up the model."""
+        self.host = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
+        self.model = os.getenv('OLLAMA_MODEL', 'mistral-small')
+        self.client = ollama.Client(host=self.host)
+        self._warmup_model()
+    
+    def _warmup_model(self) -> None:
+        """
+        Warm up the model by sending a simple request.
+        This ensures the model is loaded in memory before actual use.
+        """
+        try:
+            print(f"Warming up {self.model}...")
+            # Simple warmup prompt that works for any model
+            self.client.chat(
+                model=self.model,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": "Hi"
+                    }
+                ],
+                options={
+                    "temperature": 0.0
+                }
+            )
+            print(f"{self.model} is ready.")
+        except Exception as e:
+            print(f"Warning: Could not warm up model: {str(e)}")
+            print("The first request might be slower than usual.")
+    
     def check_configuration(self) -> tuple[bool, Optional[str]]:
         """Check if Ollama configuration is valid."""
         host = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
@@ -115,11 +147,7 @@ class OllamaProvider(LLMProvider):
     def generate_chat(self, concept: str, specialist_role: str, target_audience: str, additional_context: Optional[str] = None) -> Optional[str]:
         """Generate a chat using Ollama."""
         try:
-            host = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
-            model = os.getenv('OLLAMA_MODEL', 'mistral-small')
             temperature = float(os.getenv('OLLAMA_TEMPERATURE', '0.2'))
-            
-            client = ollama.Client(host=host)
             
             system_prompt = f"You are a sophisticated {specialist_role}."
             user_prompt = f"""
@@ -132,10 +160,8 @@ class OllamaProvider(LLMProvider):
             Format the text with Markdown syntax and apply line length limit of 80 characters.
             """
             
-            full_prompt = f"{system_prompt}\n\n{user_prompt}"
-            
-            response = client.chat(
-                model=model,
+            response = self.client.chat(
+                model=self.model,
                 messages=[
                     {
                         "role": "system",

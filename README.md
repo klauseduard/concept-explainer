@@ -186,6 +186,13 @@ OLLAMA_MODEL=mistral-small    # or other installed model
 OLLAMA_TEMPERATURE=0.2       # 0.0 to 2.0
 ```
 
+The application will automatically warm up the model on first use to minimize response time. You can also manually keep models loaded in memory using Ollama's serve command:
+```bash
+ollama serve &  # Start the Ollama server in background
+ollama pull mistral-small  # Pull the model
+ollama run mistral-small "hi"  # Pre-warm the model
+```
+
 Recommended Ollama models:
 - `mistral-small` - Fast, efficient, good quality
 - `llama2` - Strong general performance
