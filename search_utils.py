@@ -28,10 +28,20 @@ def initialize_search_indices(
             with open(indices_path, 'r') as f:
                 indices = json.load(f)
             with open(hashes_path, 'r') as f:
-                hashes = json.load(f)
+                stored_hashes = json.load(f)
+            
+            # Get current file hashes
+            _, _, current_hashes = build_corpus_and_hashes(directory)
+            
+            # Check if any files were added, removed, or modified
+            if (set(stored_hashes.keys()) != set(current_hashes.keys()) or
+                any(stored_hashes[k] != current_hashes[k] 
+                    for k in stored_hashes if k in current_hashes)):
+                logger.info("Changes detected in markdown files, rebuilding indices...")
+                return build_and_save_embeddings(directory, model_name, embeddings_path, indices_path, hashes_path)
             
             # Verify the files are valid
-            if embeddings is not None and indices and hashes:
+            if embeddings is not None and indices and stored_hashes:
                 logger.info("Existing search indices loaded successfully.")
                 model = SentenceTransformer(model_name)
                 return list(indices.keys()), embeddings, model
