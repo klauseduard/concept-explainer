@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://github.com/klauseduard/concept-explainer/blob/main/README.md 
