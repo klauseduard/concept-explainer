@@ -8,6 +8,8 @@ _Note: This documentation was updated in February 2025 using Claude 3.5 Sonnet._
 
 This is a simple tool that uses LLMs to explain concepts through simulated conversations. Originally built with OpenAI's API during the initial ChatGPT excitement, it has now been updated to also work with Ollama for local, offline usage.
 
+**Note:** Currently, the tool only accepts input in English (concept, role, and audience). Support for other languages may be added in the future.
+
 ## What it does
 
 Given a concept, a specialist role, and a target audience, it generates an explanation in a dialogue format. For example:

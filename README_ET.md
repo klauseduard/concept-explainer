@@ -6,12 +6,14 @@ _Märkus: See dokumentatsioon uuendati 2025. aasta veebruaris kasutades Claude 3
 
 See on lihtne tööriist, mis kasutab suuri keelemudeleid (LLM) mõistete selgitamiseks läbi simuleeritud vestluste. Algselt loodi see OpenAI API-ga ChatGPT algse populaarsuse ajal, nüüd on lisatud ka Ollama tugi lokaalseks, võrguühenduseta kasutamiseks.
 
+**NB!** Hetkel aktsepteerib tööriist ainult ingliskeelset sisendit (mõiste, roll ja sihtgrupp). Teiste keelte tugi võidakse lisada tulevikus.
+
 ## Mida see teeb
 
 Võtab sisendiks mõiste, spetsialisti rolli ja sihtgrupi ning genereerib selgituse dialoogi vormis. Näiteks:
-- Mõiste: "mustad augud"
-- Spetsialist: "astrofüüsik"
-- Sihtgrupp: "viieaastane"
+- Mõiste: "black holes" (mustad augud)
+- Spetsialist: "astrophysicist" (astrofüüsik)
+- Sihtgrupp: "five-year-old" (viieaastane)
 
 Väljund on Markdown formaadis ja sisaldab:
 - Põhiselgitus
@@ -60,12 +62,12 @@ OLLAMA_TEMPERATURE=0.2
 
 Põhiline käsuformaat:
 ```bash
-python explain.py <mõiste> <spetsialisti_roll> <sihtgrupp> --additional_context <kontekst>
+python explain.py <concept> <specialist_role> <target_audience> --additional_context <context>
 ```
 
 Näide:
 ```bash
-python explain.py "mustad augud" "astrofüüsik" "viieaastane" --additional_context "Eelda, et ta teab, mis on tähed."
+python explain.py "black holes" "astrophysicist" "five-year-old" --additional_context "Assume they know what stars are."
 ```
 
 ### Veebiliides
