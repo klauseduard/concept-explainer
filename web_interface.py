@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from sentence_transformers import SentenceTransformer
-from flask import Flask, render_template, request, url_for, send_from_directory
+from flask import Flask, render_template, request, url_for, send_from_directory, flash
 from flask_httpauth import HTTPBasicAuth
 from concept_explainer import generate_chat, write_to_file
 import mistune
@@ -10,11 +10,17 @@ import re
 import json
 import urllib.parse
 from pathlib import Path
+import logging
 from search_tfidf import build_tfidf_index, get_scores
-from search_semantic import load_embeddings_and_hashes, build_corpus_and_hashes, get_semantic_scores
+from search_utils import initialize_search_indices
+from search_semantic import get_semantic_scores
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)  # For flash messages
 
 # create the authentication object
 auth = HTTPBasicAuth()
@@ -22,22 +28,38 @@ auth = HTTPBasicAuth()
 # create corpus and tf-idf matrix once when server starts
 vectorizer, tfidf_matrix, filenames = build_tfidf_index("./saved_concepts")
 
-
-# semantic search stuff
+# semantic search initialization
 model_name = 'all-MiniLM-L6-v2'
 embeddings_path = 'embeddings.npy'
 hashes_path = 'hashes.json'
 directory = "./saved_concepts"
 indices_path = 'indices.json'
 
-model = SentenceTransformer(model_name)
-#embeddings, hashes = load_embeddings_and_hashes(embeddings_path, hashes_path, indices_path)
-ss_filenames, corpus, old_hashes = build_corpus_and_hashes(directory)
-embeddings, hashes = load_embeddings_and_hashes(embeddings_path, hashes_path)
-
-with open(indices_path, 'r') as f:
-    indices = json.load(f)
-
+try:
+    logger.info("Initializing search indices...")
+    ss_filenames, embeddings, model = initialize_search_indices(
+        directory=directory,
+        model_name=model_name,
+        embeddings_path=embeddings_path,
+        indices_path=indices_path,
+        hashes_path=hashes_path
+    )
+    
+    if model is None:
+        flash("Search functionality may be limited - could not initialize semantic search.", "warning")
+        logger.warning("Search initialization failed - some features may be unavailable")
+    else:
+        logger.info("Search initialization completed successfully")
+        
+    with open(indices_path, 'r') as f:
+        indices = json.load(f)
+except Exception as e:
+    logger.error(f"Error during search initialization: {e}")
+    flash("Search functionality is currently unavailable.", "error")
+    model = None
+    embeddings = None
+    indices = {}
+    ss_filenames = []
 
 # define the authentication verification function
 @auth.verify_password
