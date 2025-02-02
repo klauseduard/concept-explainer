@@ -3,7 +3,7 @@
 import argparse
 from rich import print
 from rich.markdown import Markdown
-from chat_generator import generate_chat, write_to_file
+from concept_explainer import generate_chat, write_to_file
 
 def parse_args():
     """

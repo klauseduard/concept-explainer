@@ -3,7 +3,7 @@
 from sentence_transformers import SentenceTransformer
 from flask import Flask, render_template, request, url_for, send_from_directory
 from flask_httpauth import HTTPBasicAuth
-from chat_generator import generate_chat, write_to_file
+from concept_explainer import generate_chat, write_to_file
 import mistune
 import os
 import re
