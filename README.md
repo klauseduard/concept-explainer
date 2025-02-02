@@ -1,7 +1,5 @@
 # Concept Explainer
 
-<meta name="description" content="A tool that uses LLMs (OpenAI/Ollama) to explain complex concepts through simulated expert-learner dialogues. Perfect for teachers, technical experts, and learners.">
-
 > A coding experiment from the early days of the LLM boom (2023), now updated with local LLM support.
 
 _Note: This documentation was updated in February 2025 using Claude 3.5 Sonnet._
