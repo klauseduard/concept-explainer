@@ -21,4 +21,11 @@ The web interface requires pre-built search indices (`embeddings.npy`, `indices.
 - Verify search functionality after auto-initialization
 - Test error handling for various edge cases
 
+## Changes Made
+- Created `search_utils.py` for shared search functionality
+- Added automatic index initialization in web interface
+- Added hash comparison to detect file changes
+- Added search indices to .gitignore
+- Improved error handling and user feedback
+
 Closes #6\n\n## Changes Made\n- Added Ollama as an alternative LLM provider\n- Created abstraction layer for LLM providers with `LLMProvider` abstract base class\n- Implemented `OllamaProvider` with chat functionality\n- Added environment variables for model configuration:\n  - `LLM_PROVIDER` to select provider (openai/ollama)\n  - `OLLAMA_HOST`, `OLLAMA_MODEL`, `OLLAMA_TEMPERATURE` for Ollama settings\n- Updated documentation with:\n  - Installation and setup instructions for Ollama\n  - Configuration options and examples\n  - Provider comparison table\n  - Best practices for performance\n\n## Testing Done\n- [x] Tested with OpenAI provider (existing functionality)\n- [x] Tested with Ollama provider using mistral-small model\n- [x] Verified configuration validation\n- [x] Checked error handling\n- [x] Validated markdown formatting and output\n\n## Benefits\n- Users now have a free, offline option for running the tool\n- Privacy-focused option as all data stays local\n- No API key required for Ollama\n- Flexible model selection based on user needs
