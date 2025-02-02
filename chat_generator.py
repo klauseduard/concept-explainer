@@ -7,6 +7,49 @@ from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTempla
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
+# List of supported models
+SUPPORTED_MODELS = [
+    "gpt-3.5-turbo",
+    "gpt-3.5-turbo-0125",
+    "gpt-4",
+    "gpt-4-0125"
+]
+
+def check_model_config():
+    """
+    Check if OpenAI model configuration is valid.
+    Returns a tuple of (is_valid: bool, message: str)
+    """
+    model = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
+    temp_str = os.getenv('OPENAI_TEMPERATURE', '0.2')
+    
+    # Validate model
+    if model not in SUPPORTED_MODELS:
+        message = f"""Error: Invalid OpenAI model specified!
+
+The model '{model}' is not in the list of supported models.
+Supported models are:
+{chr(10).join(['- ' + m for m in SUPPORTED_MODELS])}
+
+Please check your .env file and specify a valid model."""
+        return False, message
+    
+    # Validate temperature
+    try:
+        temp = float(temp_str)
+        if not 0.0 <= temp <= 2.0:
+            raise ValueError("Temperature must be between 0.0 and 2.0")
+    except ValueError as e:
+        message = f"""Error: Invalid temperature value!
+
+The temperature value '{temp_str}' is not valid.
+Temperature must be a number between 0.0 and 2.0.
+
+Please check your .env file and specify a valid temperature."""
+        return False, message
+    
+    return True, None
+
 def check_api_key():
     """
     Check if OpenAI API key is properly configured.
@@ -55,6 +98,12 @@ def generate_chat(concept, specialist_role, target_audience, additional_context=
         print(error_message)
         return None
 
+    # Check model configuration
+    is_valid, error_message = check_model_config()
+    if not is_valid:
+        print(error_message)
+        return None
+
     user_request = f"""
     Explain the concept of {concept} in terms so simple a {target_audience} would understand.
     {additional_context if additional_context else ""}
@@ -66,7 +115,11 @@ def generate_chat(concept, specialist_role, target_audience, additional_context=
     """
 
     try:
-        chat = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.2)
+        # Get model configuration from environment
+        model = os.getenv('OPENAI_MODEL', 'gpt-3.5-turbo')
+        temperature = float(os.getenv('OPENAI_TEMPERATURE', '0.2'))
+        
+        chat = ChatOpenAI(model=model, temperature=temperature)
         role_template = f"You are a sophisticated {specialist_role}."
         system_message_prompt = SystemMessagePromptTemplate.from_template(role_template)
         user_request_prompt = HumanMessagePromptTemplate.from_template(user_request)
@@ -81,6 +134,8 @@ def generate_chat(concept, specialist_role, target_audience, additional_context=
             print("\nNote: Your API key appears to be incorrect. Please check it and try again.")
         elif "insufficient_quota" in str(e):
             print("\nNote: Your OpenAI account has insufficient quota. Please check your billing status.")
+        elif "invalid model" in str(e).lower():
+            print("\nNote: The specified model is not available. Please check your OpenAI account access level.")
         return None
 
 def write_to_file(concept, content):
