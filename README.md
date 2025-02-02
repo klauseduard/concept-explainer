@@ -2,6 +2,8 @@
 
 > A coding experiment from the early days of the LLM boom (2023), now updated with local LLM support.
 
+_Note: This documentation was updated in February 2025 using Claude 3.5 Sonnet._
+
 This is a simple tool that uses LLMs to explain concepts through simulated conversations. Originally built with OpenAI's API during the initial ChatGPT excitement, it has now been updated to also work with Ollama for local, offline usage.
 
 ## What it does
