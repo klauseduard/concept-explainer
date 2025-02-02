@@ -87,12 +87,14 @@ Then open `http://localhost:5000` in your browser.
 - Requires API key
 - Default model: `gpt-3.5-turbo`
 - Also supports: `gpt-3.5-turbo-0125`, `gpt-4`, `gpt-4-0125`
+- Should work with newer models as they become available
 - See pricing at: https://openai.com/pricing
 
 ### Ollama Provider (new)
 - Free, runs locally
 - Default model: `mistral-small`
 - Also works with: `llama2`, `codellama`, `neural-chat`
+- Should work with any model supported by Ollama
 - No API key needed
 - Requires some CPU/GPU power
 

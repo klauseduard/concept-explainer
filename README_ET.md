@@ -85,12 +85,14 @@ Seejärel ava `http://localhost:5000` oma veebibrauseris.
 - Vajab API võtit
 - Vaikimisi mudel: `gpt-3.5-turbo`
 - Toetab ka: `gpt-3.5-turbo-0125`, `gpt-4`, `gpt-4-0125`
+- Peaks töötama ka uuemate mudelitega, kui need saadavaks muutuvad
 - Hinnad: https://openai.com/pricing
 
 ### Ollama (uus)
 - Tasuta, töötab lokaalselt
 - Vaikimisi mudel: `mistral-small`
 - Töötab ka: `llama2`, `codellama`, `neural-chat`
+- Peaks töötama kõigi Ollama poolt toetatud mudelitega
 - API võtit pole vaja
 - Vajab arvuti protsessori/graafikakaardi jõudlust
 
