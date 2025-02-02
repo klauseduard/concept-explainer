@@ -2,13 +2,8 @@
 
 import datetime
 from rich.markdown import Markdown
-from langchain import LLMChain
-from langchain.chat_models import ChatOpenAI
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
-)
+from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
+from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
 
@@ -29,17 +24,15 @@ def generate_chat(concept, specialist_role, target_audience, additional_context=
 
     load_dotenv() # take environment variables (api key) from .env
 
-    chat = ChatOpenAI(temperature=0.2)
+    chat = ChatOpenAI(model="gpt-3.5-turbo", temperature=0.2)
 
     role_template = f"You are a sophisticated {specialist_role}."
     system_message_prompt = SystemMessagePromptTemplate.from_template(role_template)
     user_request_prompt = HumanMessagePromptTemplate.from_template(user_request)
     chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, user_request_prompt])
 
-    chain = LLMChain(llm=chat, prompt=chat_prompt)
-
     try:
-        result = chain.run(concept=concept)
+        result = chat.invoke(chat_prompt.format_messages(concept=concept)).content
     except Exception as e:
         print(f"Error during chat generation: {e}")
         return None
@@ -52,7 +45,7 @@ def write_to_file(concept, content):
     """
     current_time = datetime.datetime.now().isoformat().replace(':', '').replace('-', '')
     formatted_concept = concept.replace(' ', '_')
-    filename = f"{current_time}_{formatted_concept}.md"
+    filename = f"saved_concepts/{current_time}_{formatted_concept}.md"
     
     try:
         with open(filename, 'w') as f:
