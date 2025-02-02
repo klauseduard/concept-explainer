@@ -160,3 +160,8 @@ cython_debug/
 #.idea/
 #
 
+# Search indices
+embeddings.npy
+indices.json
+hashes.json
+
