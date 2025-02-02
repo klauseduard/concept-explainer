@@ -11,6 +11,7 @@ Concept Explainer is a project that leverages the OpenAI API via Langchain to ex
   - [Web Interface](#web-interface)
 - [Implementation Notes](#implementation-notes)
 - [Markdown Reader](#markdown-reader)
+- [Model Configuration](#model-configuration)
 
 ## Installation
 
@@ -101,6 +102,46 @@ python md_reader.py "saved_concepts/black_holes_2023-07-10-15-30-00.md"
 ```
 
 This command will print the content of the specified Markdown file in the console.
+
+## Model Configuration
+
+The application supports different OpenAI models and settings through environment variables:
+
+### Available Models
+
+Configure the model using `OPENAI_MODEL` in your `.env` file:
+
+- `gpt-3.5-turbo` (default) - Good balance of performance and cost
+- `gpt-3.5-turbo-0125` - Latest GPT-3.5 version with improvements
+- `gpt-4` - Higher quality but more expensive
+- `gpt-4-0125` - Latest GPT-4 version with improvements
+
+Example:
+```bash
+OPENAI_MODEL=gpt-4
+```
+
+### Temperature Setting
+
+Control the randomness of responses using `OPENAI_TEMPERATURE` in your `.env` file:
+
+- Range: 0.0 to 2.0
+- Default: 0.2
+- Lower values (e.g., 0.2) = More focused, consistent responses
+- Higher values (e.g., 0.8) = More creative, varied responses
+
+Example:
+```bash
+OPENAI_TEMPERATURE=0.5
+```
+
+### Cost Considerations
+
+Different models have different pricing:
+- GPT-3.5 models are more cost-effective
+- GPT-4 models provide higher quality but at higher cost
+
+Please review OpenAI's pricing at: https://openai.com/pricing
 
 ## License
 
