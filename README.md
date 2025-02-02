@@ -174,11 +174,20 @@ Available OpenAI models:
 To use Ollama (local execution):
 
 1. Install Ollama from https://ollama.ai
-2. Pull the desired model:
+2. Start the Ollama server (do this once, keep it running):
 ```bash
-ollama pull mistral-small    # or other model like llama2, codellama, etc.
+ollama serve &
 ```
-3. Configure your .env file:
+3. Pull and warm up your model (do this once per model):
+```bash
+# Pull the model
+ollama pull mistral-small    # or other model like llama2, codellama, etc.
+
+# Warm up the model with a test prompt
+# This loads it into memory and makes subsequent requests faster
+ollama run mistral-small "hi"
+```
+4. Configure your .env file:
 ```bash
 LLM_PROVIDER=ollama
 OLLAMA_HOST=http://localhost:11434
@@ -186,12 +195,10 @@ OLLAMA_MODEL=mistral-small    # or other installed model
 OLLAMA_TEMPERATURE=0.2       # 0.0 to 2.0
 ```
 
-The application will automatically warm up the model on first use to minimize response time. You can also manually keep models loaded in memory using Ollama's serve command:
-```bash
-ollama serve &  # Start the Ollama server in background
-ollama pull mistral-small  # Pull the model
-ollama run mistral-small "hi"  # Pre-warm the model
-```
+For best performance:
+- Keep the Ollama server running in the background
+- Pre-warm models you plan to use
+- Consider your hardware resources when choosing models
 
 Recommended Ollama models:
 - `mistral-small` - Fast, efficient, good quality

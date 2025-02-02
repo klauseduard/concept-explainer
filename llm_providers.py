@@ -89,36 +89,10 @@ class OllamaProvider(LLMProvider):
     """Ollama implementation of LLM provider."""
     
     def __init__(self):
-        """Initialize the provider and warm up the model."""
+        """Initialize the provider."""
         self.host = os.getenv('OLLAMA_HOST', 'http://localhost:11434')
         self.model = os.getenv('OLLAMA_MODEL', 'mistral-small')
         self.client = ollama.Client(host=self.host)
-        self._warmup_model()
-    
-    def _warmup_model(self) -> None:
-        """
-        Warm up the model by sending a simple request.
-        This ensures the model is loaded in memory before actual use.
-        """
-        try:
-            print(f"Warming up {self.model}...")
-            # Simple warmup prompt that works for any model
-            self.client.chat(
-                model=self.model,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": "Hi"
-                    }
-                ],
-                options={
-                    "temperature": 0.0
-                }
-            )
-            print(f"{self.model} is ready.")
-        except Exception as e:
-            print(f"Warning: Could not warm up model: {str(e)}")
-            print("The first request might be slower than usual.")
     
     def check_configuration(self) -> tuple[bool, Optional[str]]:
         """Check if Ollama configuration is valid."""
